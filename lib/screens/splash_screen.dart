@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hit_the_color/main.dart';
 
 class SplasScreen extends StatefulWidget {
   @override
@@ -31,17 +30,8 @@ class _SplasScreenState extends State<SplasScreen> {
   }
 
   void startTimer() async {
-    Timer(Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MyHomePage(
-                    title: "Help me",
-                  )));
+    Timer(Duration(seconds: 1), () {
+      Navigator.of(context).pushNamed("/start");
     });
-  }
-
-  void nextScreen() {
-    MyHomePage(title: 'Flutter Demo Home Page');
   }
 }
