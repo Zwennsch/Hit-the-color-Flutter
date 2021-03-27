@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hit_the_color/screens/over_screen.dart';
 import 'package:hit_the_color/screens/play_screen.dart';
 import 'package:hit_the_color/screens/start_screen.dart';
 
@@ -12,6 +13,9 @@ class RouteGenerator {
 
       case "/play":
         return MaterialPageRoute(builder: (_) => PlayScreen());
+
+      case "/over":
+        return MaterialPageRoute(builder: (_) => OverScreen());
 
       default:
         return _errRoute();
