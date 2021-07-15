@@ -5,9 +5,9 @@ import 'package:hit_the_color/screens/start_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+    final args = settings.name;
 
-    switch (settings.name) {
+    switch (args) {
       case "/start":
         return MaterialPageRoute(builder: (_) => StartScreen());
 
