@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -6,43 +7,33 @@ enum MyButtonColor { blue, green, red, yellow }
 
 class ColorHandler extends ChangeNotifier {
   static List<String> myColorNames = ["BLUE", "GREEN", "RED", "YELLOW"];
-  // the current Color is always the first element in the List
-  String _currentColor = myColorNames[0];
-
-  String get currentColor => _currentColor;
-
-  List<MyButtonColor> _myColors = [
-    MyButtonColor.blue,
-    MyButtonColor.green,
-    MyButtonColor.red,
-    MyButtonColor.yellow
+  final Random _random = Random();
+  List<Color> _buttonColorsList = [
+    Colors.blue,
+    Colors.green,
+    Colors.red,
+    Colors.yellow
   ];
 
-  UnmodifiableListView<MyButtonColor> get myColorsList {
-    return UnmodifiableListView(_myColors);
+  UnmodifiableListView<Color> get buttonColorList {
+    return UnmodifiableListView(_buttonColorsList);
   }
 
-  static Map<MyButtonColor, String> colorStringMap = {
-    MyButtonColor.blue: "BLUE",
-    MyButtonColor.green: "GREEN",
-    MyButtonColor.red: "RED",
-    MyButtonColor.yellow: "YELLOW"
+  // the current Color is always the first element in the List
+  Color _centerButtonColor = Colors.green;
+  Color get centerButtonColor => _centerButtonColor;
+
+  String _currentColorName = myColorNames[0];
+  String get centerColorName => _currentColorName;
+
+
+  static Map<Color, String> colorStringMap = {
+    Colors.blue: "BLUE",
+    Colors.green: "GREEN",
+    Colors.red: "RED",
+    Colors.yellow: "YELLOW"
   };
 
-//  static List<MyButtonColor> get colorList{
-//    return myColors;
-//  }
-
-  static Color getButtonColor(MyButtonColor color) {
-    if (color == MyButtonColor.blue)
-      return Colors.blue;
-    else if (color == MyButtonColor.red)
-      return Colors.red;
-    else if (color == MyButtonColor.green)
-      return Colors.green;
-    else
-      return Colors.yellow;
-  }
 
   static String getButtonColorName(MyButtonColor color) {
     if (color == MyButtonColor.blue)
@@ -55,19 +46,26 @@ class ColorHandler extends ChangeNotifier {
       return "YELLOW";
   }
 
+  Color getRandomColor() {
+    Color randomColor =
+        _buttonColorsList[_random.nextInt(_buttonColorsList.length)];
+    return randomColor;
+  }
+
   void shuffleColorAndNamesLists() {
-    _myColors.shuffle();
     myColorNames.shuffle();
+    _buttonColorsList.shuffle();
+    _centerButtonColor = _buttonColorsList[0];
+    _currentColorName = myColorNames[0];
     notifyListeners();
   }
 
-  bool checkColorForButton(int i) {
-    String colorOfPushedButton = colorStringMap[_myColors[i]];
-    if (colorOfPushedButton == currentColor){
+  bool checkColorForButton(int buttonNr) {
+    String colorOfPushedButton = colorStringMap[_buttonColorsList[buttonNr]];
+    if (colorOfPushedButton == centerColorName) {
       shuffleColorAndNamesLists();
       return true;
-    }
-    else
+    } else
       return false;
   }
 }

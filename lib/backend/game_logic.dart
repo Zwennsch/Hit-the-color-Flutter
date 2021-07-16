@@ -13,5 +13,14 @@ class GameLogic extends ChangeNotifier {
   void scoreUp() {
     score++;
     notifyListeners();
+    if (score % 10 == 0) {
+      levelUp();
+    }
+  }
+
+  void resetGame() {
+    score = 0;
+    level = 1;
+    gameOver = false;
   }
 }

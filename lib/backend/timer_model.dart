@@ -3,12 +3,16 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 
 class TimerModel extends ChangeNotifier {
-  int _counter;
-  int startValue;
+  static int _counter = 5;
+  // int startValue;
   Timer _timer;
-  TimerModel(this._counter);
+  TimerModel();
+  bool running = true;
 
   int get counterValue => _counter;
+  // set counterValue(int counter) {
+  //   _counter = counter;
+  // }
 
   void startCounter(int start) {
     _counter = start;
@@ -17,6 +21,7 @@ class TimerModel extends ChangeNotifier {
     }
     _timer = Timer.periodic(Duration(seconds: 1), (_) {
       if (_counter <= 0) {
+        running = false;
         notifyListeners();
         _timer.cancel();
         // Navigator.of(context).pushNamed("/over");
@@ -29,5 +34,11 @@ class TimerModel extends ChangeNotifier {
 
   void resetCounter(int start) {
     _counter = start;
+  }
+
+  void stopTimerAndReset() {
+    _counter = 5;
+    _timer.cancel();
+    running = true;
   }
 }

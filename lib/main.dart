@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => TimerModel(5)),
+        ChangeNotifierProvider(create: (context) => TimerModel()),
         ChangeNotifierProvider(create: (context) => ColorHandler()),
         ChangeNotifierProvider(create: (context) => GameLogic())
       ],

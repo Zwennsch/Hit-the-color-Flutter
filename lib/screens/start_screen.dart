@@ -1,10 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-// import 'package:hit_the_color/backend/color_handler.dart';
-// import 'package:hit_the_color/backend/game_logic.dart';
-// import 'package:hit_the_color/backend/timer_model.dart';
-// import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
 class StartScreen extends StatelessWidget {
   @override
